@@ -21,12 +21,11 @@ let windSpeed = "meter/second";
 function getAndShowWeather() {
   let cityName = cityInput.value;
   let countryName = countryInput.value;
-  let zipcode = zipcodeInput.value;
+  let zipcode = zipcodeInput.value;  
 
   if (cityName !== "" && countryName !== "" && zipcode === "") {
-    //capitalize city and country name
-    cityName = cityName[0].toUpperCase() + cityName.slice(1);
-    countryName = countryName[0].toUpperCase() + countryName.slice(1);
+    /* //capitalize city name
+    cityName = cityName[0].toUpperCase() + cityName.slice(1); */
 
     weather.getWeatherCityName(cityName, countryName, unit).then((data) => {
       //show alert if city name cannto be found
@@ -34,9 +33,9 @@ function getAndShowWeather() {
         showAlert("City not found");
         weatherDescription.innerHTML = "";
       } else {
-        console.log(data);
-
-        weatherDescription.innerHTML = `<h3>The current weather in ${cityName} (${countryName}) is:</h3> 
+/*         console.log(data);
+ */
+        weatherDescription.innerHTML = `<h3>The current weather in ${data.name} (${countryName}) is:</h3> 
        <ul>
         <li>Description: ${data.weather[0].description};</li>
         <li>Min-temperature: ${data.main.temp_min} ${degree};</li>
@@ -55,8 +54,8 @@ function getAndShowWeather() {
         showAlert("Check zipcode");
         weatherDescription.innerHTML = "";
       } else {
-        console.log(data);
-        weatherDescription.innerHTML = `<h3>The current weather in ${data.name} is:</h3> 
+/*         console.log(data);
+ */        weatherDescription.innerHTML = `<h3>The current weather in ${data.name} (${countryName}) is:</h3> 
         <ul>
          <li>Description: ${data.weather[0].description};</li>
          <li>Min-temperature: ${data.main.temp_min} ${degree};</li>

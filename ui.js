@@ -292,7 +292,7 @@ let countries = {
   MZ: "Mozambique",
 };
 
-Object.keys(countries).forEach(function (key) {
+Object.keys(countries).forEach((key) => {
   let option = document.createElement("option");
   let content = document.createTextNode(key);
   option.appendChild(content);
