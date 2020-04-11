@@ -15,20 +15,27 @@ let windSpeed = "meter/second";
 
 // function get and show weather
 
-function getAndShowWeather(){
+function getAndShowWeather() {
+  // getting the inputs values
   let location = locationInput.value;
   let country = countryInput.value;
+  // declare prefix variable
   let prefix = "q=";
-  
-  if(location === "" || country === ""){
-    showAlert("Fill out all fields")
+
+  if (location === "" || country === "") {
+    //if one of the fiels is clear, show alert message
+    showAlert("Fill out all fields");
   } else {
-    getWeatherRequest(prefix, location, country, unit).then((data)=>{
-      if(typeof location === "number"){
-        prefix ="zip="
-      } if(data.message === "city not found") {
+    getWeatherRequest(prefix, location, country, unit).then((data) => {
+      //if user enter zipcode change prefix
+      if (typeof location === "number") {
+        prefix = "zip=";
+      }
+      if (data.message === "city not found") {
+        //if city is not found, show alert
         showAlert("City not found");
-      } 
+      }
+      //populating weather description with data from API
       weatherDescription.innerHTML = `<h3>The current weather in ${data.name} (${country}) is:</h3> 
       <ul>
        <li>Description: ${data.weather[0].description};</li>
@@ -38,14 +45,14 @@ function getAndShowWeather(){
        <li>Wind speed: ${data.wind.speed} ${windSpeed};</li>
        <li>Humidity: ${data.main.humidity}%;</li>
       </ul>
-    <div><img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="icon"></div>`
-    })
+    <div><img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="icon"></div>`;
+    });
   }
 }
 
 ///event listeners
 
-// display weather
+// display weather on click or enter key
 btnDisplayWeather.addEventListener("click", getAndShowWeather);
 document.getElementById("main-content").addEventListener("keydown", (e) => {
   if (e.keyCode === 13) {
