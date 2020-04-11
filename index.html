@@ -11,37 +11,37 @@
     <title>Weather app</title>
   </head>
   <body>
-    <button id="degree-format">C°</button>
-    <div id="container">
-      <label for="city-input">Enter a city name:</label>
-      <input
-        id="city-input"
-        type="text"
-        autofocus
-        placeholder="Enter city name"
-      />
-      <p>Or zipcode:</p>
-      <input
-        id="zipcode-input"
-        type="text"
-        autofocus
-        placeholder="Enter zip code"
-      />
-      <br />
-      <label for="country-input">Specify country:</label>
-      <select name="country" id="country-input" onfocus="this.value='Select country code'">
-        <option id="option1" disabled selected>Select country code</option>
-      </select>
-      <button class="btn" id="btn">Get Weather</button>
+    <div class="wrapper-container" id="wrapper-container">
+      <div class ="main-content" id="main-content">
+        <label
+          >Enter a city name or zipcode:
+          <input
+            id="location-input"
+            type="text"
+            autofocus
+            placeholder="Enter city name or zipcode"/>
+        <br />
+        <label
+          >Specify country:
+          <select name="country" id="country-input">
+            <option id="option1" disabled selected>Select country code</option>
+          </select>
+        </label>
+        <button class="btn-displayWeather" id="btn-displayWeather">
+          Get Weather
+        </button>
+        <button class="btn-changeDegreeFormat" id="btn-changeDegreeFormat">C°</button>
+      </div>
+      <section class="weather-description" id="weather-description"></section>
+      <footer>
+        <p>
+          We recommend using zip code and country code to get unambiguous
+          result for your city (i.g. cities with the same name located in the
+          same country).
+        </p>
+      </footer>
     </div>
-    <div id="weather-description"></div>
-    <footer>
-      <p>
-        We recommend using zip code and country code to avoid disambiguities
-        (i.g. cities with the same name located in the same country).
-      </p>
-    </footer>
-    <script src="script.js"></script>
+    <script src="requests.js"></script>
     <script src="ui.js"></script>
     <script src="app.js"></script>
   </body>

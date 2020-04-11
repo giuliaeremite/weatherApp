@@ -1,83 +1,53 @@
-// init classes
+//retrieving html elements
 
-const weather = new WeatherByCityName();
-const weatherZip = new WeatherByZipCode();
-
-//retrieve html elements
-
-const btn = document.getElementById("btn");
-const cityInput = document.getElementById("city-input");
+const btnDisplayWeather = document.getElementById("btn-displayWeather");
+const locationInput = document.getElementById("location-input");
 const countryInput = document.getElementById("country-input");
 const zipcodeInput = document.getElementById("zipcode-input");
-
-const degreeBtn = document.getElementById("degree-format");
+const degreeBtn = document.getElementById("btn-changeDegreeFormat");
 const weatherDescription = document.getElementById("weather-description");
+
+// units variables
+
 let unit = "metric";
 let degree = "C°";
 let windSpeed = "meter/second";
 
 // function get and show weather
 
-function getAndShowWeather() {
-  let cityName = cityInput.value;
-  let countryName = countryInput.value;
-  let zipcode = zipcodeInput.value;  
-
-  if (cityName !== "" && countryName !== "" && zipcode === "") {
-    /* //capitalize city name
-    cityName = cityName[0].toUpperCase() + cityName.slice(1); */
-
-    weather.getWeatherCityName(cityName, countryName, unit).then((data) => {
-      //show alert if city name cannto be found
-      if (data.message === "city not found") {
-        showAlert("City not found");
-        weatherDescription.innerHTML = "";
-      } else {
-/*         console.log(data);
- */
-        weatherDescription.innerHTML = `<h3>The current weather in ${data.name} (${countryName}) is:</h3> 
-       <ul>
-        <li>Description: ${data.weather[0].description};</li>
-        <li>Min-temperature: ${data.main.temp_min} ${degree};</li>
-        <li>Max-temperature: ${data.main.temp_max} ${degree};</li>
-        <li>Clouds: ${data.clouds.all}%;</li>
-        <li>Wind speed: ${data.wind.speed} ${windSpeed};</li>
-        <li>Humidity: ${data.main.humidity}%;</li>
-       </ul>
-     <div><img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="icon"></div>`;
-      }
-    });
-  } else if (zipcode !== "" && countryName !== "" && cityName === "") {
-    weatherZip.getWeatherZipCode(zipcode, countryName, unit).then((data) => {
-      //show alert
-      if (data.message === "city not found") {
-        showAlert("Check zipcode");
-        weatherDescription.innerHTML = "";
-      } else {
-/*         console.log(data);
- */        weatherDescription.innerHTML = `<h3>The current weather in ${data.name} (${countryName}) is:</h3> 
-        <ul>
-         <li>Description: ${data.weather[0].description};</li>
-         <li>Min-temperature: ${data.main.temp_min} ${degree};</li>
-         <li>Max-temperature: ${data.main.temp_max} ${degree};</li>
-         <li>Clouds: ${data.clouds.all}%;</li>
-         <li>Wind speed: ${data.wind.speed} ${windSpeed};</li>
-         <li>Humidity: ${data.main.humidity}%;</li>
-        </ul>
-      <div><img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="icon"></div>`;
-      }
-    });
+function getAndShowWeather(){
+  let location = locationInput.value;
+  let country = countryInput.value;
+  let prefix = "q=";
+  
+  if(location === "" || country === ""){
+    showAlert("Fill out all fields")
   } else {
-    showAlert("Fill out fields correctly");
-    weatherDescription.innerHTML = "";
+    getWeatherRequest(prefix, location, country, unit).then((data)=>{
+      if(typeof location === "number"){
+        prefix ="zip="
+      } if(data.message === "city not found") {
+        showAlert("City not found");
+      } 
+      weatherDescription.innerHTML = `<h3>The current weather in ${data.name} (${country}) is:</h3> 
+      <ul>
+       <li>Description: ${data.weather[0].description};</li>
+       <li>Min-temperature: ${data.main.temp_min} ${degree};</li>
+       <li>Max-temperature: ${data.main.temp_max} ${degree};</li>
+       <li>Clouds: ${data.clouds.all}%;</li>
+       <li>Wind speed: ${data.wind.speed} ${windSpeed};</li>
+       <li>Humidity: ${data.main.humidity}%;</li>
+      </ul>
+    <div><img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="icon"></div>`
+    })
   }
 }
 
 ///event listeners
 
-//display weather
-btn.addEventListener("click", getAndShowWeather);
-document.getElementById("container").addEventListener("keydown", (e) => {
+// display weather
+btnDisplayWeather.addEventListener("click", getAndShowWeather);
+document.getElementById("main-content").addEventListener("keydown", (e) => {
   if (e.keyCode === 13) {
     getAndShowWeather();
   }
