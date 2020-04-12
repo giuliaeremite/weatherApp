@@ -34,8 +34,9 @@ function getAndShowWeather() {
       if (data.message === "city not found") {
         //if city is not found, show alert
         showAlert("City not found");
+        weatherDescription.innerHTML = "";
       }
-      //populating weather description with data from API
+      //populate weather description with data from API
       weatherDescription.innerHTML = `<h3>The current weather in ${data.name} (${country}) is:</h3> 
       <ul>
        <li>Description: ${data.weather[0].description};</li>

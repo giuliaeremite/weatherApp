@@ -17,12 +17,19 @@ function changeDegreeFormat() {
 //show alert message
 
 function showAlert(message) {
+  //create errorBox div element
   let errorBox = document.createElement("div");
+  // get error message
   let errorMessage = document.createTextNode(message);
+  // add CSS error class
   errorBox.classList.add("error");
+  // append error message to div
   errorBox.appendChild(errorMessage);
+  // place div before footer element
   const footer = document.querySelector("footer");
   document.getElementById("wrapper-container").insertBefore(errorBox, footer);
+
+  //remove error div after 3s
   setTimeout(function () {
     document.getElementById("wrapper-container").removeChild(errorBox);
   }, 3000);
@@ -30,23 +37,25 @@ function showAlert(message) {
 
 // delete weather description and clear inputs when on focus
 
-const inputs = document.querySelectorAll("input");
-for (let i = 0; i < inputs.length; i++) {
-  inputs[i].addEventListener("focus", (e) => {
-    e.target.value = "";
-    document.getElementById("weather-description").innerHTML = "";
-  });
-}
+const input = document.getElementById("location-input");
+input.addEventListener("focus", (e) => {
+  e.target.value = "";
+  document.getElementById("weather-description").innerHTML = "";
+});
 
 // populate select input with country codes options
 
-getCountries().then((data) => {
+getCountryCodes().then((data) => {
+  //sort country codes alphabetically 
   data = Object.keys(data).sort();
 
   data.forEach((key) => {
+    //create option element
     let option = document.createElement("option");
+    //add key name as text
     let content = document.createTextNode(key);
     option.appendChild(content);
+    //append element to parent element select
     document.getElementById("country-input").appendChild(option);
   });
 });
