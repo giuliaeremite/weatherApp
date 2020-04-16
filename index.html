@@ -12,16 +12,16 @@
   </head>
   <body>
     <div class="wrapper-container" id="wrapper-container">
-      <div class ="main-content" id="main-content">
-        <label
-          >Enter a city name or zipcode:
+      <main class ="main-content" id="main-content">
+        <label class="location-label"
+          >Enter a city name <span>or</span> zipcode:
           <input
             id="location-input"
             type="text"
             autofocus
             placeholder="Enter city name or zipcode"/>
         <br/>
-        <label
+        <label 
           >Specify country:
           <select name="country" id="country-input">
             <option id="option1" disabled selected>Select country code</option>
@@ -31,9 +31,9 @@
           Get Weather
         </button>
         <button class="btn-changeDegreeFormat" id="btn-changeDegreeFormat">C°</button>
-      </div>
+      </main>
       <section class="weather-description" id="weather-description"></section>
-      <footer>
+      <footer id="main-footer" class="main-footer">
         <p>
           We recommend using zip code and country code to get unambiguous
           results for your location (i.g. cities with the same name located in the
@@ -42,7 +42,7 @@
       </footer>
     </div>
     <script src="requests.js"></script>
-    <script src="ui.js"></script>
+    <script src="functions.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
