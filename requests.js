@@ -1,6 +1,5 @@
 //DATA REQUESTS
 
-
 const requests = {
   //get data from OpenWeatherMap API
 
@@ -19,4 +18,4 @@ const requests = {
   },
 };
 
-
+////////////// IMPLEMENT GEO LOCATION ////////////////////////
