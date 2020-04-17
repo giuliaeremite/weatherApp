@@ -1,7 +1,6 @@
 // get and show weather
 
 function getAndShowWeather(location, country) {
-
   if (location === "" || country === "") {
     //if one of the fiels is clear, show alert message
     showAlert("Fill out all fields");
@@ -37,22 +36,27 @@ function showWeatherDescription(data) {
 <div><img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="icon"></div>`;
 }
 
-//change units metric/imperial ------------ CAN BE IMPROVED!!! -----------------
+//change units metric/imperial
 
-function changeDegreeFormat() {
-  if (unit === "metric") {
-    degreeBtn.textContent = "F°";
+function changeDegreeFormat(format) {
+  if (format === "metric") {
     unit = "imperial";
+    degreeBtn.textContent = "F°";
     degree = "F°";
     windSpeed = "miles/hour";
   } else {
-    degreeBtn.textContent = "C°";
     unit = "metric";
+    degreeBtn.textContent = "C°";
     degree = "C°";
     windSpeed = "meter/second";
   }
 }
 
+// change text content of element
+
+function changeText(el, text) {
+  el.textContent = text;
+}
 //show alert message
 
 function showAlert(message) {

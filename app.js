@@ -33,7 +33,9 @@ let windSpeed = "meter/second";
   });
 
   // change units format and display weather
-  degreeBtn.addEventListener("click", changeDegreeFormat);
+  degreeBtn.addEventListener("click", function () {
+    changeDegreeFormat(unit);
+  });
 
   degreeBtn.addEventListener("click", function () {
     getAndShowWeather(locationInput.value, countryInput.value);
