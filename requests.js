@@ -1,3 +1,6 @@
+//DATA REQUESTS
+
+
 const requests = {
   //get data from OpenWeatherMap API
 

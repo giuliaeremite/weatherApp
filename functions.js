@@ -1,4 +1,4 @@
-// get and show weather
+// GET AND SHOW WEATHER
 
 function getAndShowWeather(location, country) {
   if (location === "" || country === "") {
@@ -20,7 +20,7 @@ function getAndShowWeather(location, country) {
   }
 }
 
-// display weather description
+// DISPLAY WEATHER DESCRIPTION
 
 function showWeatherDescription(data) {
   //populate weather description with data from API
@@ -36,7 +36,7 @@ function showWeatherDescription(data) {
 <div><img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="icon"></div>`;
 }
 
-//change units metric/imperial
+//CHANGE UNIT FORMAT METRIC/IMPERIAL
 
 function changeDegreeFormat(format) {
   if (format === "metric") {
@@ -52,12 +52,7 @@ function changeDegreeFormat(format) {
   }
 }
 
-// change text content of element
-
-function changeText(el, text) {
-  el.textContent = text;
-}
-//show alert message
+//SHOW ALERT MESSAGE
 
 function showAlert(message) {
   //create errorBox div element
@@ -78,14 +73,14 @@ function showAlert(message) {
   }, 3000);
 }
 
-// delete weather description and clear inputs when on focus
+// DELETE WEATHER DESCRIPTION AND CLEAR INPUT FIELD
 
 function clearField(input) {
   input.target.value = "";
   document.getElementById("weather-description").textContent = "";
 }
 
-// populate select input with country codes options
+// POPULATE SELECT INPUT WITH COUNTRY CODE OPTIONS
 
 function populateSelectInput(input) {
   requests.getCountryCodes().then((data) => {
