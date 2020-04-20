@@ -1,6 +1,6 @@
 //DATA REQUESTS
 
-const requests = {
+const requestsMethods = {
   //get data from OpenWeatherMap API
 
   getWeatherRequest: async function (prefix, location, country, unit) {
@@ -18,4 +18,3 @@ const requests = {
   },
 };
 
-////////////// IMPLEMENT GEO LOCATION ////////////////////////

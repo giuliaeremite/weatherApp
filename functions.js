@@ -1,22 +1,24 @@
 // GET AND SHOW WEATHER
 
 function getAndShowWeather(location, country) {
+  //if one of the fields is empty, show alert
   if (location === "" || country === "") {
-    //if one of the fiels is clear, show alert message
     showAlert("Fill out all fields");
   } else {
-    requests.getWeatherRequest(prefix, location, country, unit).then((data) => {
-      //if user enter zipcode change prefix
-      if (typeof location === "number") {
-        prefix = "zip=";
-      }
-      if (data.message === "city not found") {
-        //if city is not found, show alert
-        showAlert("City not found");
-        weatherDescription.innerHTML = "";
-      }
-      showWeatherDescription(data);
-    });
+    //request weather data from API
+    requestsMethods
+      .getWeatherRequest(prefix, location, country, unit)
+      .then((data) => {
+        if (data.message === "city not found") {
+          showAlert("City not found, check fields");
+        } else {
+          // if location is number search by zip
+          if (typeof location === "number") {
+            prefix = "zip=";
+            showWeatherDescription(data);
+          } else showWeatherDescription(data);
+        }
+      });
   }
 }
 
@@ -75,26 +77,28 @@ function showAlert(message) {
 
 // DELETE WEATHER DESCRIPTION AND CLEAR INPUT FIELD
 
-function clearField(input) {
-  input.target.value = "";
+function clearField(inputField) {
+  inputField.target.value = "";
   document.getElementById("weather-description").textContent = "";
 }
 
 // POPULATE SELECT INPUT WITH COUNTRY CODE OPTIONS
 
-function populateSelectInput(input) {
-  requests.getCountryCodes().then((data) => {
+function populateSelectInput(selectInput) {
+  requestsMethods.getCountryCodes().then((data) => {
     //sort country codes alphabetically
-    data = Object.keys(data)
+    Object.keys(data)
       .sort()
       .forEach((key) => {
         //create option element
         let option = document.createElement("option");
-        //add key name as text
+        //add key name as text to element
         let content = document.createTextNode(key);
         option.appendChild(content);
-        //append element to parent element select
-        input.appendChild(option);
+        //append element to parent element select input
+        selectInput.appendChild(option);
       });
   });
 }
+
+
