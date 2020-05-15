@@ -101,4 +101,10 @@ function populateSelectInput(selectInput) {
   });
 }
 
+// RESET SELECT OPTION
 
+function resetSelectInput(selectInput) {
+  selectInput.addEventListener("focus", function () {
+    selectInput.options[0].selected = true;
+  });
+}

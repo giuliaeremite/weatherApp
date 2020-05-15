@@ -21,6 +21,10 @@ let windSpeed = "meter/second";
   //clear input field
   locationInput.addEventListener("focus", clearField);
 
+  // reset select input
+
+  resetSelectInput(countryInput);
+
   // display weather on click
   btnDisplayWeather.addEventListener("click", function () {
     getAndShowWeather(locationInput.value, countryInput.value);
@@ -29,6 +33,7 @@ let windSpeed = "meter/second";
   document.getElementById("main-content").addEventListener("keydown", (e) => {
     if (e.keyCode === 13) {
       getAndShowWeather(locationInput.value, countryInput.value);
+      countryInput.blur();
     }
   });
 
@@ -41,3 +46,5 @@ let windSpeed = "meter/second";
     getAndShowWeather(locationInput.value, countryInput.value);
   });
 })();
+
+
